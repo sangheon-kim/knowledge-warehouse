@@ -1,5 +1,4 @@
 # Reflow & Repaint
-<<<<<<< HEAD
 
 출처 : https://github.com/wonism/TIL/blob/master/front-end/browser/reflow-repaint.md
 
@@ -7,8 +6,6 @@
 
 - Reflow & Repaint의 개념을 이해하기전에 브라우저의 동작 과정에 대해 먼저 이해해보자.
 - <a href="https://github.com/sangheon-kim/knowledge-warehouse/tree/master/Browser">브라우저의 동작 과정</a>
-=======
->>>>>>> b26a69c56038736dd643a151511bd2845b4137e7
 
 <b>Repaint</b>
 
