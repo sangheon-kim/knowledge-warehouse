@@ -1,8 +1,6 @@
 # 브라우저의 동작 과정
 
-출처 : https://d2.naver.com/helloworld/59361
-
-### 브라웢의 주요 기능
+### 브라우저의 주요 기능
 
 - 사용자가 선택한 자원을 서버에 요청하고 브라우저에 표시하는 것. => 자원의 주소는 URI(Uniform Resource Identifier)에 의해 정해진다.
 
@@ -42,3 +40,56 @@
 <strong>파싱 일반</strong>
 
 <p>브라우저가 코드를 이해하고 사용할 수 있는 구조로 변환 => res) <code>파싱 트리(parse tree)</code> or <code>문법 트리(Syntax tree)</code>라고 부른다. </p>
+
+<strong>문법</strong>
+
+<p>
+  파싱은 문서에 작성된 언어 또는 형식의 규칙에 따르는데 파싱할 수 있는 모든 형식은 정해진 용어와 구문 규칙에 따라야 한다. => <strong>문맥 자유 문법</strong>
+</p>
+
+<strong>DOM</strong>
+
+<p>파싱 트리는 DOM 요소와 속성 노드의 트리로, 출력 트리가 된다. HTML 문서의 객체 표현, 외부로 향하는 자바스크립트 같은 HTML 요소의 연결 지점 트리의 최상위 객체는 <code>문서</code></p>
+
+```html
+<html>
+  <body>
+    <p>Hello World</p>
+    <div><img src="" /></div>
+  </body>
+</html>
+```
+
+<pre>
+  * DOM 트리 구조 * 
+ ├── <b>HTMLhtmlElement                  * HTML Element </b>
+ │    ├── HTMLBodyElement             *  바디 태그
+ │         ├── HTMLParagraphElement   *  p태그
+ │              ├── text              *  text
+ │         ├── HTMLDivElement         *  Div태그
+ │              ├── Image             *  image 태그
+ └── webpack.config.js                * webpack 설정
+ </pre>
+
+<strong>HTML 파싱 과정</strong>
+<br />
+<img src="./image/htmlparse.png">
+
+#### 토큰화 알고리즘
+
+```html
+<html>
+  <body>
+    Hello World
+  </body>
+</html>
+```
+
+- 초기 상태 - 자료 상태
+- 태그 열림 상태 - <code><</code> 문자를 만났을때
+- 태그 이름 상태 - <code>[A~Z]</code> 문자를 만났을떄
+- 자료 상태로 돌아감 - <code>></code> 문자를 만났을때
+
+##### Status : Processing - 30%
+
+출처 : https://d2.naver.com/helloworld/59361
