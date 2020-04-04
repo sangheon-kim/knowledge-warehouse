@@ -15,4 +15,4 @@
 ## Session Storage & Local Storage & Cookie
 
 - <a href="https://github.com/sangheon-kim/knowledge-warehouse/tree/master/WebStorage">WebStorage</a><br />
-  <small>Processing 1%</small>
+  <small>Status: Complete(100%)</small>
