@@ -5,7 +5,7 @@
 <i>하단에 링크안에 브라우저 동작과정 설명 기재</i>
 
 - <a href="https://github.com/sangheon-kim/knowledge-warehouse/tree/master/ReflownRepaint">Reflow 와 Repaint</a><br />
-  <small>Processing 5%</small>
+  <small>Processing 85%</small>
 
 ## webkit-line-clamp
 

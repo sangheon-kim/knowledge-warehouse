@@ -83,8 +83,33 @@ document.body.appendChild(frag);
 ```
 
 - 11. 캐쉬를 활용한 Reflow 최소화.
-      <br/>--> 브라우
+      <br/>--> 브라우저는 레이아웃 변경을 큐에 저장했다가 한번에 실행함으로 최소화, offset, scrollTop과 같은 계산된 스타일 정보를 요청시 정확한 정보 제공 위해 큐를 비우고, 모든 변경 다시 적용
+      <br/>--> 수치에 대한 스타일 정보 변수에 저장하여 정보 요청 회수 줄임으로 리플로우 최소화
 
-#### status : processing - 80%
+```javascript
+// Bad Code
+for (let i = 0; i < len; i++) {
+  el.style.top = `${el.offsetTop + 10}px`;
+  el.style.left = `${el.offsetLeft + 10}px`;
+}
+
+let top = el.offsetTop,
+  left = el.offsetLeft,
+  elStyle = el.style;
+
+for (let i = 0; i < len; i++) {
+  top += 10;
+  left += 10;
+  elStyle.top = `${top}px`;
+  elStyle.left = `${left}px`;
+}
+```
+
+- 12. 브라우저 도구로 리페인트 이슈 분석하기
+      <br/>--> 모든 주류 브라우저는 리플로우가 성능에 미치는 영향을 보여주는 타임라인 도구 제공
+      <img src="./images/browser.png" alt="browser-image" />
+      - Recalculate Style 이 보통 리페인트와 리플로우 이슈를 확인할 수 있다.
+
+#### Status : Complete
 
 출처 : https://github.com/wonism/TIL/blob/master/front-end/browser/reflow-repaint.md
