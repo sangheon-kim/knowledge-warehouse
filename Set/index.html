@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <script>
+      const arrayLikeObj = {
+        0: "hello",
+        1: "erin",
+        2: "kim",
+        length: 3,
+      };
+      const str = new String("hello");
+      console.log(Symbol.iterator in str);
+
+      const list = document.getElementById("list");
+      const item = list.getElementsByTagName("li");
+      console.log(item);
+
+      const item2 = list.querySelectorAll("li");
+      console.log(item2);
+
+      var obj = {
+        title: 123,
+      };
+      const array = [1, 2, 3];
+      const set = new Set();
+      const map = new Map();
+      for (let node of item) {
+        console.log(node);
+      }
+
+      const fibonacci = {
+        [Symbol.iterator]() {
+          let [pre, cur] = [0, 1];
+          const max = 10;
+
+          return {
+            next() {
+              [pre, cur] = [cur, pre + cur];
+              return { value: cur, done: cur >= max };
+            },
+          };
+        },
+      };
+
+      console.log(Symbol.iterator in fibonacci);
+      console.log(Symbol.iterator in arrayLikeObj);
+      debugger;
+    </script>
+  </body>
+</html>
