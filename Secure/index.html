@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <input type="hidden" id="token" name="token" />
+    <input type="text" id="input" />
+    <button id="submitBtn">전송</button>
+  </form>
+  <script>
+    const $submitBtn = document.getElementById("submitBtn");
+    const $input = document.getElementById("input");
+    const $hidden = document.getElementById("token");
+
+    $submitBtn.onclick = function(e) {
+      e.preventDefault();
+      $hidden.value = 'secure';
+
+      
+      console.log({
+        value: $input.value,
+        token: $hidden.value
+      })
+    }
+  </script>
+</body>
+</html>
