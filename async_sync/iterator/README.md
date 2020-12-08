@@ -79,8 +79,8 @@ console.log("obj[Symbol.iterator]", obj[Symbol.iterator]);
 
 ### 이터레이터 오브젝트
 
-- 이터러블 오브젝트에서 Symbol.iterator()를 호출하면 이터레이터 오브젝트가 생성되어 반환된ㄷ.
-- 이터레이터 오브젝트에 next()가 이다.
+- 이터러블 오브젝트에서 Symbol.iterator()를 호출하면 이터레이터 오브젝트가 생성되어 반환된다.
+- 이터레이터 오브젝트에 next()가 있다.
 - 생성한 오브젝트를 이터레이터라고도 부른다.
 
 ```js
