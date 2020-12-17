@@ -48,8 +48,7 @@ $circleBoard.addEventListener("click", function (e) {
   let { offsetX, offsetY } = e;
 
   if (e.target.id !== "point") {
-    // $point.style.backgroundColor = "red";
-
+    // 클릭한 위치에 따라 위치 환산
     $point.style.left = `${offsetX - $point.clientWidth * 0.66}px`;
     $point.style.top = `${offsetY - $point.clientHeight * 0.66}px`;
     $point.style.transform = "initial";
@@ -62,15 +61,7 @@ $circleBoard.addEventListener("click", function (e) {
     $saturationInput.value = pointerDistance;
     $saturationRange.value = pointerDistance;
 
-    // 중심점에서 현재 원에서의 x좌표값
-    const x = centerPoint - offsetX;
-    // 중심점에서 현재 원에서의 y좌표값
-    const y = centerPoint - offsetY;
-    // radian 값 구하기
-    let radian = Math.atan2(x, y);
-    // radian 값 활용해서 각도 구하기
-    const degree =
-      offsetX < 117 ? Math.floor(360 - radian2degree(radian)) : Math.floor(radian2degree(radian));
+    const degree = useDistanceCalculateAngle(centerPoint, [offsetX, offsetY]);
 
     $hueInput.value = degree;
     $hueRange.value = degree;
@@ -220,4 +211,26 @@ function circleEquation(centerPoint, offsetArray) {
  */
 function changeResultBoard() {
   return ($resultBoard.style.backgroundColor = `hsl(${$hueRange.value}, ${$saturationRange.value}%, ${$lightnessRange.value}%)`);
+}
+
+/**
+ *
+ * @description 거리값과 중심좌표와 현재 좌표값을 이용하여, 각도 계산 함수
+ * @param {*} centerPoint
+ * @param {*} offsetArray
+ * @returns
+ */
+function useDistanceCalculateAngle(centerPoint, offsetArray) {
+  const [offsetX, offsetY] = offsetArray;
+  // 중심점에서 현재 원에서의 x좌표값
+  const x = centerPoint - offsetX;
+  // 중심점에서 현재 원에서의 y좌표값
+  const y = centerPoint - offsetY;
+  // radian 값 구하기
+  let radian = Math.atan2(x, y);
+  // radian 값 활용해서 각도 구하기
+  const degree =
+    offsetX < 117 ? Math.floor(360 - radian2degree(radian)) : Math.floor(radian2degree(radian));
+
+  return degree;
 }
