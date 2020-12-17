@@ -44,32 +44,6 @@ function radian2degree(radian) {
   return Math.abs((180 / Math.PI) * radian);
 }
 
-$circleBoard.addEventListener("click", function (e) {
-  let { offsetX, offsetY } = e;
-
-  if (e.target.id !== "point") {
-    // 클릭한 위치에 따라 위치 환산
-    $point.style.left = `${offsetX - $point.clientWidth * 0.66}px`;
-    $point.style.top = `${offsetY - $point.clientHeight * 0.66}px`;
-    $point.style.transform = "initial";
-
-    // 거리는 원의 방정식을 이용해서 구해준다.
-    let distance = circleEquation(centerPoint, [offsetX, offsetY]);
-    // 포인터의 거리에 대한 반지름 비율 계산
-    const pointerDistance = Math.floor((distance / centerPoint) * 100);
-
-    $saturationInput.value = pointerDistance;
-    $saturationRange.value = pointerDistance;
-
-    const degree = useDistanceCalculateAngle(centerPoint, [offsetX, offsetY]);
-
-    $hueInput.value = degree;
-    $hueRange.value = degree;
-
-    changeResultBoard();
-  }
-});
-
 /**
  *
  * @description 밝기 변화 이벤트 핸들러 전달 콜백
@@ -129,63 +103,9 @@ function registerEventListener(element, eventType, cb, type) {
   });
 }
 
-const hslObj = {
-  hue: {
-    maxNum: 360,
-    minNum: 0,
-    cb: hueChange,
-    input: $hueInput,
-    range: $hueRange,
-  },
-  lightness: {
-    maxNum: 100,
-    minNum: 0,
-    cb: lightnessChange,
-    input: $lightnessInput,
-    range: $lightnessRange,
-  },
-  saturation: {
-    maxNum: 100,
-    minNum: 0,
-    cb: saturationChange,
-    input: $saturationInput,
-    range: $saturationRange,
-  },
-};
-
-function inputEvent(e, type) {
-  const value = Number(e.target.value);
-
-  if (value > hslObj[type].maxNum) {
-    hslObj[type].input.value = hslObj[type].maxNum;
-    hslObj[type].range.value = hslObj[type].maxNum;
-    hslObj[type]["cb"](hslObj[type].maxNum);
-  } else {
-    hslObj[type].input.value = value;
-    hslObj[type].range.value = value;
-    hslObj[type]["cb"](value);
-  }
-}
-
-function rangeEvent(e, type) {
-  const value = e.target.value;
-
-  hslObj[type].input.value = value;
-  hslObj[type].range.value = value;
-  hslObj[type]["cb"](value);
-}
-
-registerEventListener($hueInput, "input", inputEvent, "hue");
-registerEventListener($hueRange, "input", rangeEvent, "hue");
-registerEventListener($lightnessInput, "input", inputEvent, "lightness");
-registerEventListener($lightnessRange, "input", rangeEvent, "lightness");
-registerEventListener($saturationInput, "input", inputEvent, "saturation");
-registerEventListener($saturationRange, "input", rangeEvent, "saturation");
-
 /**
  *
  * @description 원의 방정식 구하기 (중심점 기준으로 좌표값의 위치 파악)
- * @Function hoisting
  * @author Sangheon Kim
  * @param {*} centerPoint 중심점
  * @param {*} offsetArray x,y 좌표 배열
@@ -206,7 +126,6 @@ function circleEquation(centerPoint, offsetArray) {
 /**
  * @description 결과펀애 색상 반영
  * @author Sangheon Kim
- * @Function hoisting
  * @returns
  */
 function changeResultBoard() {
@@ -234,3 +153,93 @@ function useDistanceCalculateAngle(centerPoint, offsetArray) {
 
   return degree;
 }
+
+/**
+ *
+ * @description input 이벤트 처리
+ * @param {*} e
+ * @param {*} type
+ */
+function inputEvent(e, type) {
+  const value = Number(e.target.value);
+
+  if (value > hslObj[type].maxNum) {
+    hslObj[type].input.value = hslObj[type].maxNum;
+    hslObj[type].range.value = hslObj[type].maxNum;
+    hslObj[type]["cb"](hslObj[type].maxNum);
+  } else {
+    hslObj[type].input.value = value;
+    hslObj[type].range.value = value;
+    hslObj[type]["cb"](value);
+  }
+}
+/**
+ *
+ * @description rangeInput 이벤트 처리
+ * @param {*} e
+ * @param {*} type
+ */
+function rangeEvent(e, type) {
+  const value = e.target.value;
+
+  hslObj[type].input.value = value;
+  hslObj[type].range.value = value;
+  hslObj[type]["cb"](value);
+}
+
+const hslObj = {
+  hue: {
+    maxNum: 360,
+    minNum: 0,
+    cb: hueChange,
+    input: $hueInput,
+    range: $hueRange,
+  },
+  lightness: {
+    maxNum: 100,
+    minNum: 0,
+    cb: lightnessChange,
+    input: $lightnessInput,
+    range: $lightnessRange,
+  },
+  saturation: {
+    maxNum: 100,
+    minNum: 0,
+    cb: saturationChange,
+    input: $saturationInput,
+    range: $saturationRange,
+  },
+};
+
+$circleBoard.addEventListener("click", function (e) {
+  let { offsetX, offsetY } = e;
+
+  if (e.target.id !== "point") {
+    // 클릭한 위치에 따라 위치 환산
+    $point.style.left = `${offsetX - $point.clientWidth * 0.66}px`;
+    $point.style.top = `${offsetY - $point.clientHeight * 0.66}px`;
+    $point.style.transform = "initial";
+
+    // 거리는 원의 방정식을 이용해서 구해준다.
+    let distance = circleEquation(centerPoint, [offsetX, offsetY]);
+    // 포인터의 거리에 대한 반지름 비율 계산
+    const pointerDistance = Math.floor((distance / centerPoint) * 100);
+
+    $saturationInput.value = pointerDistance;
+    $saturationRange.value = pointerDistance;
+
+    const degree = useDistanceCalculateAngle(centerPoint, [offsetX, offsetY]);
+
+    $hueInput.value = degree;
+    $hueRange.value = degree;
+
+    changeResultBoard();
+  }
+});
+
+registerEventListener($hueInput, "input", inputEvent, "hue");
+registerEventListener($hueRange, "input", rangeEvent, "hue");
+registerEventListener($lightnessInput, "input", inputEvent, "lightness");
+registerEventListener($lightnessRange, "input", rangeEvent, "lightness");
+registerEventListener($saturationInput, "input", inputEvent, "saturation");
+registerEventListener($saturationRange, "input", rangeEvent, "saturation");
