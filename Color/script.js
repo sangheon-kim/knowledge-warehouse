@@ -16,8 +16,6 @@ const $lightnessInput = document.querySelector("#lightness-input");
 // 결과판
 const $resultBoard = document.querySelector(".result-board");
 
-// 배열 비구조화 할당으로 width, Height 꺼내기
-const [height, width] = [$circleBoard.clientHeight, $circleBoard.clientWidth];
 // 정사각형이기때문에 중심좌표는 반지름이다.
 const centerPoint = Math.floor($circleBoard.clientWidth / 2);
 // 초기값으로 세팅해놓은 값으로 결과판의 색상 지정

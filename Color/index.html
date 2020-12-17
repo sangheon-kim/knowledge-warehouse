@@ -4,93 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>상헌이의 HSL 색상환표</title>
-  <style>
-    .circle {
-      position: relative;
-      /* position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); */
-      width: 350px;
-      height: 350px;
-      border: 1px solid black;
-      border-radius: 50%;
-      background-image: url("./img/OiprB.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-
-    .color-circle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      width: 66%;
-      height: 66%;
-      box-sizing: border-box;
-      cursor: pointer;
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .point {
-      position: absolute;
-      top: -7.5px;
-      left: 50%;
-      transform: translateX(-50%);
-      transform-origin: center;
-      width: 15px;
-      height:15px;
-      border-radius: 50%;
-      border: 2px solid gray;
-      /* box-sizing: border-box; */
-      background-color: red;
-    }
-
-    .brightness-board {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      width: 67%;
-      height: 67%;
-      box-sizing: border-box;
-      cursor: pointer;
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .result-board {
-      width: 150px;
-      height: 100px;
-      border: 1px solid black;;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="circle">
-    <div class="color-circle">
-      <div class="point" id="point"></div>
+  <div class="wrapper">
+    <div class="circle">
+      <div class="color-circle">
+        <div class="point" id="point"></div>
+      </div>
+      <div class="brightness-board"></div>
     </div>
-    <div class="brightness-board"></div>
+    <div>
+      <label for="hue">HUE (색조)</label>
+      <input type="range" id="hue-range" name="hue" value="0" min="0" max="359" step="1" />
+      <input type="number" name="hue" value="0" id="hue-input" /><span> °</span>
+    </div>
+    <div>
+      <label for="saturation">Saturation (채도)</label>
+      <input type="range" id="saturation-range" name="saturation" value="100" min="0" max="100" step="0.1" />
+      <input type="number" name="saturation" value="100" id="saturation-input" /><span>%</span>
+    </div>
+    <div>
+      <label for="lightness">Lightness (밝기)</label>
+      <input type="range" id="lightness-range" name="lightness" value="50" min="0" max="100" step="1" />
+      <input type="number" name="lightness" value="50" id="lightness-input" max="100" /><span>%</span>
+    </div>
+    <div class="result-board"></div>
   </div>
-  <div>
-    <label for="hue">HUE (색조)</label>
-    <input type="range" id="hue-range" name="hue" value="0" min="0" max="359" step="1" />
-    <input type="number" name="hue" value="0" id="hue-input" /><span> °</span>
-  </div>
-  <div>
-    <label for="saturation">Saturation (채도)</label>
-    <input type="range" id="saturation-range" name="saturation" value="100" min="0" max="100" step="0.1" />
-    <input type="number" name="saturation" value="100" id="saturation-input" /><span>%</span>
-  </div>
-  <div>
-    <label for="lightness">Lightness (밝기)</label>
-    <input type="range" id="lightness-range" name="lightness" value="50" min="0" max="100" step="1" />
-    <input type="number" name="lightness" value="50" id="lightness-input" max="100"/><span>%</span>
-  </div>
-  <div class="result-board"></div>
   <script src="./script.js"></script>
 </body>
 </html>

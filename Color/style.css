@@ -1,0 +1,90 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.circle {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-image: url("./img//OiprB.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-bottom: 30px;
+}
+
+.color-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66%;
+  height: 66%;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.point {
+  position: absolute;
+  top: -7.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid gray;
+  /* box-sizing: border-box; */
+  background-color: red;
+}
+
+.brightness-board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 67%;
+  height: 67%;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.result-board {
+  width: 150px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.form > label {
+  min-width: 110px;
+  margin-right: 16px;
+}
+
+.form > input[type="range"] {
+  margin-right: 12px;
+  min-width: 100px;
+}
+.form > input[type="number"] {
+  width: 50px;
+}
+
+input[type="number"] + span {
+  margin-left: 5px;
+}
