@@ -36,10 +36,10 @@
 
 .point {
   position: absolute;
-  top: -7.5px;
-  left: 50%;
-  transform: translateX(-50%);
-  transform-origin: center;
+  top: -8px;
+  left: calc(50% - 7.5px);
+  /* transform: translateX(-50%); */
+  /* transform-origin: center; */
   width: 15px;
   height: 15px;
   border-radius: 50%;

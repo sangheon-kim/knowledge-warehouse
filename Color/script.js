@@ -74,8 +74,8 @@ function hueChange(hue) {
   const dx = centerPoint + radius * Math.cos(degree2radian(hue));
   const dy = centerPoint + radius * Math.sin(degree2radian(hue));
 
-  $point.style.left = `${dx}px`;
-  $point.style.top = `${dy - $point.clientWidth * 0.33}px`;
+  $point.style.left = `${dx - 7.5}px`;
+  $point.style.top = `${dy - 7.5}px`;
   changeResultBoard();
 }
 
@@ -90,8 +90,8 @@ function saturationChange(saturation) {
   const dx = centerPoint + distance * Math.cos(degree2radian($hueRange.value));
   const dy = centerPoint + distance * Math.sin(degree2radian($hueRange.value));
 
-  $point.style.left = `${dx}px`;
-  $point.style.top = `${dy - $point.clientWidth * 0.33}px`;
+  $point.style.left = `${dx - 7.5}px`;
+  $point.style.top = `${dy - 7.5}px`;
   changeResultBoard();
 }
 
@@ -127,7 +127,100 @@ function circleEquation(centerPoint, offsetArray) {
  * @returns
  */
 function changeResultBoard() {
+  hslToRgb();
+  // const C = ()
   return ($resultBoard.style.backgroundColor = `hsl(${$hueRange.value}, ${$saturationRange.value}%, ${$lightnessRange.value}%)`);
+}
+
+/**
+ * @description HSL to RGB
+ *
+ */
+function hslToRgb() {
+  const H = $hueRange.value;
+  const S = $saturationRange.value / 100;
+  const L = $lightnessRange.value / 100;
+
+  const C = (1 - Math.abs(2 * L - 1)) * S;
+  const X = C * (1 - Math.abs(((H / 60) % 2) - 1));
+  const m = L - C / 2;
+
+  let R1, G1, B1;
+
+  if (H >= 0 && H <= 60) {
+    R1 = C;
+    G1 = X;
+    B1 = 0;
+  } else if (H >= 60 && H < 120) {
+    R1 = X;
+    G1 = C;
+    B1 = 0;
+  } else if (H >= 120 && H < 180) {
+    R1 = 0;
+    G1 = C;
+    B1 = X;
+  } else if (H >= 180 && H < 240) {
+    R1 = 0;
+    G1 = X;
+    B1 = C;
+  } else if (H >= 240 && H < 300) {
+    R1 = X;
+    G1 = 0;
+    B1 = C;
+  } else {
+    R1 = C;
+    G1 = 0;
+    B1 = X;
+
+    console.log({ R1, m, C });
+  }
+
+  const [R, G, B] = [
+    Math.floor((R1 + m) * 255),
+    Math.floor((G1 + m) * 255),
+    Math.floor((B1 + m) * 255),
+  ];
+
+  console.log({ R, G, B });
+
+  rgbToHsl(R, G, B);
+}
+
+function rgbToHsl(R, G, B) {
+  let H, S, L;
+  // R`, G`, B` R` = R / 255, G` = G / 255, B` = B / 255
+  const args = [R, G, B].map((item) => item / 255);
+
+  const CMax = Math.max(...args);
+  const CMin = Math.min(...args);
+  const triangle = CMax - CMin;
+  const maxIndex = args.lastIndexOf(CMax);
+  console.log(maxIndex);
+
+  L = (CMax + CMin) / 2;
+  console.log(triangle);
+  if (!!triangle) {
+    switch (maxIndex) {
+      case 0:
+        H = 60 * Math.abs(((args[1] - args[2]) / triangle) % 6);
+        break;
+      case 1:
+        H = 60 * ((args[2] - args[0]) / triangle + 2);
+        break;
+      case 2:
+        H = 60 * ((args[0] - args[1]) / triangle + 4);
+        break;
+      default:
+        break;
+    }
+
+    S = triangle / (1 - Math.abs(2 * L - 1));
+  } else {
+    H = 0;
+    S = 0;
+  }
+
+  console.log({ H, S, L });
 }
 
 /**
@@ -214,9 +307,9 @@ $circleBoard.addEventListener("click", function (e) {
 
   if (e.target.id !== "point") {
     // 클릭한 위치에 따라 위치 환산
-    $point.style.left = `${offsetX - $point.clientWidth * 0.66}px`;
-    $point.style.top = `${offsetY - $point.clientHeight * 0.66}px`;
-    $point.style.transform = "initial";
+    $point.style.left = `${offsetX - 7.5}px`;
+    $point.style.top = `${offsetY - 7.5}px`;
+    // $point.style.transform = "initial";
 
     // 거리는 원의 방정식을 이용해서 구해준다.
     let distance = circleEquation(centerPoint, [offsetX, offsetY]);
