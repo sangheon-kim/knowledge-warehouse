@@ -15,6 +15,10 @@ const $lightnessRange = document.querySelector("#lightness-range");
 const $lightnessInput = document.querySelector("#lightness-input");
 // 결과판
 const $resultBoard = document.querySelector(".result-board");
+const $redInput = document.querySelector("#red-input");
+const $blueInput = document.querySelector("#blue-input");
+const $greenInput = document.querySelector("#green-input");
+const $hexInput = document.querySelector("#hex-input");
 
 // 정사각형이기때문에 중심좌표는 반지름이다.
 const centerPoint = Math.floor($circleBoard.clientWidth / 2);
@@ -128,13 +132,12 @@ function circleEquation(centerPoint, offsetArray) {
  */
 function changeResultBoard() {
   hslToRgb();
-  // const C = ()
   return ($resultBoard.style.backgroundColor = `hsl(${$hueRange.value}, ${$saturationRange.value}%, ${$lightnessRange.value}%)`);
 }
 
 /**
  * @description HSL to RGB
- *
+ * @author Sangheon Kim
  */
 function hslToRgb() {
   const H = $hueRange.value;
@@ -171,8 +174,6 @@ function hslToRgb() {
     R1 = C;
     G1 = 0;
     B1 = X;
-
-    console.log({ R1, m, C });
   }
 
   const [R, G, B] = [
@@ -181,46 +182,72 @@ function hslToRgb() {
     Math.floor((B1 + m) * 255),
   ];
 
-  console.log({ R, G, B });
+  // console.log({ R, G, B });
 
+  $redInput.value = R;
+  $greenInput.value = G;
+  $blueInput.value = B;
   rgbToHsl(R, G, B);
+  rgbToHex(R, G, B);
 }
 
+/**
+ *
+ * @description RGB to HSL
+ * @param {*} R
+ * @param {*} G
+ * @param {*} B
+ * @author Sangheon Kim
+ */
 function rgbToHsl(R, G, B) {
   let H, S, L;
   // R`, G`, B` R` = R / 255, G` = G / 255, B` = B / 255
   const args = [R, G, B].map((item) => item / 255);
-
+  const [R1, G1, B1] = args;
   const CMax = Math.max(...args);
   const CMin = Math.min(...args);
   const triangle = CMax - CMin;
   const maxIndex = args.lastIndexOf(CMax);
-  console.log(maxIndex);
 
   L = (CMax + CMin) / 2;
-  console.log(triangle);
   if (!!triangle) {
     switch (maxIndex) {
       case 0:
-        H = 60 * Math.abs(((args[1] - args[2]) / triangle) % 6);
+        H = ((G1 - B1) / triangle) % 6;
         break;
       case 1:
-        H = 60 * ((args[2] - args[0]) / triangle + 2);
+        H = (B1 - R1) / triangle + 2;
         break;
       case 2:
-        H = 60 * ((args[0] - args[1]) / triangle + 4);
+        H = (R1 - G1) / triangle + 4;
         break;
       default:
         break;
     }
-
+    H *= 60;
     S = triangle / (1 - Math.abs(2 * L - 1));
   } else {
     H = 0;
     S = 0;
   }
+  H = Math.floor(H);
+  if (H < 0) H += 360;
+}
 
-  console.log({ H, S, L });
+/**
+ *
+ * @description RGB to Hex
+ * @param {*} R
+ * @param {*} G
+ * @param {*} B
+ */
+function rgbToHex(R, G, B) {
+  let Hex = R * 65536 + G * 256 + B;
+  Hex = Hex.toString(16, 6);
+  let len = Hex.length;
+  if (len < 6) for (i = 0; i < 6 - len; i++) Hex = "0" + Hex;
+
+  $hexInput.value = Hex.toUpperCase();
 }
 
 /**
