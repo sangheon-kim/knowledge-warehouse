@@ -53,6 +53,8 @@
 - Lightness(명도)
   - 밝기다 default는 50%에서 출발해서 100%에 가까워질수록 흰색에 가까운 색을 뜁니다.
 
+### - <a href="https://codesandbox.io/s/sangheonkimhsl-color-model-k4zo2">Demo</a>
+
 ## 4강 색의 대비
 
 - 색은 고유의 색조와 채도 그리고 명도를 갖습니다.
@@ -95,3 +97,5 @@
   ![](img/sh-12-23-13-07.png)
 
   > 각 디스플레이 장치 마다 색을 나타낼 수 있는 색 영역이 다르다.
+
+cc) https://ko.khanacademy.org/partner-content/pixar/color
