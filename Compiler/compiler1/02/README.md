@@ -11,6 +11,8 @@
 
 ### Definition Alphabet T is a finite set of symbols
 
+### Language
+
 - T1 = {A, B, C, ...,Z, a,b,c, ..., z}
 - T2 = {dom switch, break, case, ..., while}
 
@@ -84,3 +86,47 @@
 - L ^ 0 = {ε}
 - L ^ 1 = {a, ba, aab}
 - L ^ 2 = {aa, aba, aaba, baa, baba, baaab, aaba, aabba, aabaab}
+
+`Reflexitve Transitive Closure`
+
+- L ^ 0 = {ε} 이기 때문에 가능한 것. L ^ \* 은 {ε}을 포함한다.
+  ![](img/sh-01-19-10-48.png)
+
+`Transitive Clousre`
+
+- L을 가지고 L ^ + 를 만들 수 있다.
+  ![](img/sh-01-19-10-49.png)
+
+### Grammar
+
+`Production Rule, P (생성 규칙)`
+
+- 유한한 production Rule 들의 집합
+- S - a, a1, a2, a3, ak, ab, a_3
+- A - ε, 1, ,2, 3, k, b, \_3
+- P :
+
+  - S -> aAS (A는 처음에 나올 수 는없다.) a - non-terminal, A - terminal
+  - S -> a
+  - A -> SbA
+  - A -> ba
+  - A -> SS
+
+- P :
+  - S -> aAS | a
+  - A -> SbA | ba | SS
+
+`Grammar, G (4개의 원소로 구성된 문법)`
+
+- G = (Vn, Vt, P, S) (non-termialed, terminaled, Production Rule )
+- Vn {S, A, B}
+- Vt {a, b, ε}
+
+- P: 5개의 production Rule
+
+  - S -> aA | bB | ε
+  - A -> bS
+  - B -> aS
+
+- abba 가 해당 production Rule에 의해 적용될 수 있는지 보자
+- S => aA => abS => abbB => abbaS => abba (s가 ε을 가질 수 있기 때문에)
