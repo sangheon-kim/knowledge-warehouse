@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  클릭시에는 스타일이 복사됩니다. (마우스 오버시에 트랜지션 확인)
+  <h1>Transition</h1>
+  <div id="box-group">
+    <div class="box" id="box1">
+      <strong>transition <br /> 미적용</strong>
+      <code>
+        transition: initial
+      </code>
+    </div>
+    <div class="box" id="box2">
+      <strong>너비에만 적용<br /> 2초 딜레이 (ease)</strong>
+      <code>
+        transition: width 1s ease;
+        // transition-property: width;
+        // transition-delay: 2s;
+        // transition-duration: 1s;
+        // transition-timing-function: ease;
+      </code>
+    </div>
+    <div class="box" id="box3">
+      <strong>모든 것에 적용 (linear) 딜레이 x</strong>
+      <code>
+        transition: width 1s ease;
+        // transition-property: all;
+        // transition-duration: 1s;
+        // transition-timing-function: ease;
+      </code>
+    </div>
+
+    <div class="box" id="box4">
+      <strong>색깔에만 적용 (ease-in-out) 딜레이 1s</strong>
+      <code>
+        transition: background-color 1s ease-in-out 1s;
+        // transition-property: background-color;
+        // transition-duration: 1s;
+        // transition-timing-function: ease-in-out;
+        // transition-delay: 1s;
+      </code>
+    </div>
+  </div>
+  <
+  <script src="clipboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.box {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: #777;
+  cursor: pointer;
+  font-size: 0.1px;
+  margin-top: 30px;
+  text-align: center;
+
+  strong {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    white-space: pre-wrap;
+  }
+
+  &#box2 {
+    transition-property: width;
+    transition-delay: 1s;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+  }
+
+  &#box3 {
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+  }
+
+  &#box4 {
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 1s;
+  }
+
+  &:hover {
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+  }
+}
