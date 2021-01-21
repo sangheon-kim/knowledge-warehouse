@@ -15,3 +15,13 @@
 
 - X => aX | B, X => B | aX(B, aX)
 - aaaB => X = a ^ \* B X = a ^ \* B
+- (double check) X = aX + b = a(a \* B) + B = a ^ + + B = (a ^ + + ε)B = a ^ \* B
+
+[Example]
+
+- For G = ({S, R}, {a,b}, P, S), L(G)
+- (i) S -> aS | bR | ε and (ii) R -> aS.
+- P를 먼저 변환해준다. (i) S = aS + bR + ε and (ii) R = aS
+- S = aS + b(aS) + ε = aS + baS + ε = (a + ba)S + ε = (a + ba) ^ \* \* ε = (a + ba) ^ \*,
+- L(G) = (a + ba) ^ \*
+- S를 위에 솔루션과 똑같이 생각하면 a ^ \* B
